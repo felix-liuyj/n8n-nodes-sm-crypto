@@ -1,48 +1,90 @@
-![Banner image](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)
+_π
+This is an n8n community node. It lets you use SM2 cryptographic operations in your n8n workflows.
 
-# n8n-nodes-starter
+SM2 is a public-key cryptography algorithm based on elliptic curves, part of the Chinese National Cryptographic Standard (GM/T 0003-2012). This node provides secure encryption and decryption capabilities using the SM2 algorithm.
 
-This repo contains example nodes to help you get started building your own custom integrations for [n8n](https://n8n.io). It includes the node linter and other dependencies.
+[n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
 
-To make your custom node available to the community, you must create it as an npm package, and [submit it to the npm registry](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry).
+[Installation](#installation)  
+[Operations](#operations)  
+[Compatibility](#compatibility)  
+[Usage](#usage)  
+[Resources](#resources)  
 
-If you would like your node to be available on n8n cloud you can also [submit your node for verification](https://docs.n8n.io/integrations/creating-nodes/deploy/submit-community-nodes/).
+## Installation
 
-## Prerequisites
+Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
 
-You need the following installed on your development machine:
+Install the package:
+```bash
+npm install n8n-nodes-sm2-crypto
+```
 
-* [git](https://git-scm.com/downloads)
-* Node.js and npm. Minimum version Node 20. You can find instructions on how to install both using nvm (Node Version Manager) for Linux, Mac, and WSL [here](https://github.com/nvm-sh/nvm). For Windows users, refer to Microsoft's guide to [Install NodeJS on Windows](https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows).
-* Install n8n with:
-  ```
-  npm install n8n -g
-  ```
-* Recommended: follow n8n's guide to [set up your development environment](https://docs.n8n.io/integrations/creating-nodes/build/node-development-environment/).
+## Operations
 
-## Using this starter
+This node supports the following operations:
 
-These are the basic steps for working with the starter. For detailed guidance on creating and publishing nodes, refer to the [documentation](https://docs.n8n.io/integrations/creating-nodes/).
+- **Encrypt**: Encrypt plaintext data using an SM2 public key
+- **Decrypt**: Decrypt ciphertext using an SM2 private key
 
-1. [Generate a new repository](https://github.com/n8n-io/n8n-nodes-starter/generate) from this template repository.
-2. Clone your new repo:
-   ```
-   git clone https://github.com/<your organization>/<your-repo-name>.git
-   ```
-3. Run `npm i` to install dependencies.
-4. Open the project in your editor.
-5. Browse the examples in `/nodes` and `/credentials`. Modify the examples, or replace them with your own nodes.
-6. Update the `package.json` to match your details.
-7. Run `npm run lint` to check for errors or `npm run lintfix` to automatically fix errors when possible.
-8. Test your node locally. Refer to [Run your node locally](https://docs.n8n.io/integrations/creating-nodes/test/run-node-locally/) for guidance.
-9. Replace this README with documentation for your node. Use the [README_TEMPLATE](README_TEMPLATE.md) to get started.
-10. Update the LICENSE file to use your details.
-11. [Publish](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry) your package to npm.
+## Compatibility
 
-## More information
+- Minimum n8n version: 1.0.0
+- Node.js version: >=20.15
+- Tested with n8n versions: 1.x
 
-Refer to our [documentation on creating nodes](https://docs.n8n.io/integrations/creating-nodes/) for detailed information on building your own nodes.
+## Usage
+
+### Basic Setup
+
+1. Add the SM2 Crypto node to your workflow
+2. Select the operation (Encrypt or Decrypt)
+3. Provide the appropriate key:
+   - For **Encrypt**: Use the SM2 public key
+   - For **Decrypt**: Use the SM2 private key
+4. Specify the input field name containing the data to process
+
+### Input Configuration
+
+- **Operation**: Choose between "Encrypt" or "Decrypt"
+- **Token (Key)**: 
+  - For encryption: SM2 public key (hex format)
+  - For decryption: SM2 private key (hex format)
+- **Input Field Name**: Name of the field in your input data that contains the text to encrypt/decrypt (default: "data")
+
+### Output
+
+The node adds the result to your data:
+- **Encryption**: Adds a `ciphertext` field with the encrypted data (prefixed with '04')
+- **Decryption**: Adds a `plaintext` field with the decrypted data
+- **Error**: If an error occurs, an `error` field is added with the error message
+
+### Example Usage
+
+**Encryption Example:**
+```json
+Input: { "data": "Hello, World!" }
+Output: { "data": "Hello, World!", "ciphertext": "04..." }
+```
+
+**Decryption Example:**
+```json
+Input: { "data": "04..." }
+Output: { "data": "04...", "plaintext": "Hello, World!" }
+```
+
+### Key Format
+
+Keys should be provided in hexadecimal format:
+- Public keys: 64-character hex string (uncompressed format without '04' prefix)
+- Private keys: 64-character hex string
+
+## Resources
+
+* [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
+* [SM2 Cryptographic Algorithm Specification](https://tools.ietf.org/html/draft-shen-sm2-ecdsa-02)
+* [sm-crypto library documentation](https://github.com/JuneAndGreen/sm-crypto)
 
 ## License
 
-[MIT](https://github.com/n8n-io/n8n-nodes-starter/blob/master/LICENSE.md)
+[MIT](LICENSE.md)
