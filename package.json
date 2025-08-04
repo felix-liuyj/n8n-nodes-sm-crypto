@@ -1,15 +1,21 @@
 {
-  "name": "n8n-nodes-<...>",
-  "version": "0.1.0",
-  "description": "",
+  "name": "n8n-nodes-sm2-crypto",
+  "version": "1.0.0",
+  "description": "SM2 encryption and decryption node for n8n",
   "keywords": [
-    "n8n-community-node-package"
+    "n8n-community-node-package",
+    "n8n",
+    "n8n-community-node",
+    "sm2",
+    "crypto",
+    "sm-crypto",
+    "国密"
   ],
   "license": "MIT",
   "homepage": "",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "Felix Liu",
+    "email": "felixliuyj@gmail.com"
   },
   "repository": {
     "type": "git",
@@ -42,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@types/sm-crypto": "^0.3.4",
     "@typescript-eslint/parser": "~8.32.0",
     "eslint": "^8.57.0",
     "eslint-plugin-n8n-nodes-base": "^1.16.3",
@@ -51,5 +58,8 @@
   },
   "peerDependencies": {
     "n8n-workflow": "*"
+  },
+  "dependencies": {
+    "sm-crypto": "^0.3.13"
   }
 }
