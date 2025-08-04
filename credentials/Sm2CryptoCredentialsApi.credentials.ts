@@ -5,7 +5,7 @@ import {
 	INodeProperties,
 } from 'n8n-workflow';
 
-export class ExampleCredentialsApi implements ICredentialType {
+export class Sm2CryptoCredentialsApi implements ICredentialType {
 	name = 'exampleCredentialsApi';
 	displayName = 'Example Credentials API';
 
