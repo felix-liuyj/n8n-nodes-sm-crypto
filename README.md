@@ -1,90 +1,91 @@
-_π
-This is an n8n community node. It lets you use SM2 cryptographic operations in your n8n workflows.
+# n8n-nodes-sm-crypto
 
-SM2 is a public-key cryptography algorithm based on elliptic curves, part of the Chinese National Cryptographic Standard (GM/T 0003-2012). This node provides secure encryption and decryption capabilities using the SM2 algorithm.
+这是一个 n8n 社区节点，让您可以在 n8n 工作流中使用 SM2 密码学操作。
 
-[n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
+SM2 是基于椭圆曲线的公钥密码算法，是中国国家密码标准（GM/T 0003-2012）的一部分。该节点使用 SM2 算法提供安全的加密和解密功能。
 
-[Installation](#installation)  
-[Operations](#operations)  
-[Compatibility](#compatibility)  
-[Usage](#usage)  
-[Resources](#resources)  
+[n8n](https://n8n.io/) 是一个[公平代码许可](https://docs.n8n.io/reference/license/)的工作流自动化平台。
 
-## Installation
+[安装](#安装)  
+[操作](#操作)  
+[兼容性](#兼容性)  
+[使用方法](#使用方法)  
+[资源](#资源)  
 
-Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
+## 安装
 
-Install the package:
+请按照 n8n 社区节点文档中的[安装指南](https://docs.n8n.io/integrations/community-nodes/installation/)进行操作。
+
+安装软件包：
 ```bash
 npm install n8n-nodes-sm-crypto
 ```
 
-## Operations
+## 操作
 
-This node supports the following operations:
+该节点支持以下操作：
 
-- **Encrypt**: Encrypt plaintext data using an SM2 public key
-- **Decrypt**: Decrypt ciphertext using an SM2 private key
+- **加密**：使用 SM2 公钥加密明文数据
+- **解密**：使用 SM2 私钥解密密文
 
-## Compatibility
+## 兼容性
 
-- Minimum n8n version: 1.0.0
-- Node.js version: >=20.15
-- Tested with n8n versions: 1.x
+- 最低 n8n 版本：1.0.0
+- Node.js 版本：>=20.15
+- 已测试的 n8n 版本：1.x
 
-## Usage
+## 使用方法
 
-### Basic Setup
+### 基本设置
 
-1. Add the SM2 Crypto node to your workflow
-2. Select the operation (Encrypt or Decrypt)
-3. Provide the appropriate key:
-   - For **Encrypt**: Use the SM2 public key
-   - For **Decrypt**: Use the SM2 private key
-4. Specify the input field name containing the data to process
+1. 将 SM2 加密节点添加到您的工作流中
+2. 选择操作（加密或解密）
+3. 提供适当的密钥：
+   - 对于**加密**：使用 SM2 公钥
+   - 对于**解密**：使用 SM2 私钥
+4. 指定包含要处理数据的输入字段名称
 
-### Input Configuration
+### 输入配置
 
-- **Operation**: Choose between "Encrypt" or "Decrypt"
-- **Token (Key)**: 
-  - For encryption: SM2 public key (hex format)
-  - For decryption: SM2 private key (hex format)
-- **Input Field Name**: Name of the field in your input data that contains the text to encrypt/decrypt (default: "data")
+- **操作**：选择"加密"或"解密"
+- **令牌（密钥）**：
+  - 用于加密：SM2 公钥（十六进制格式）
+  - 用于解密：SM2 私钥（十六进制格式）
+- **输入字段名称**：输入数据中包含要加密/解密文本的字段名称（默认："data"）
 
-### Output
+### 输出
 
-The node adds the result to your data:
-- **Encryption**: Adds a `ciphertext` field with the encrypted data (prefixed with '04')
-- **Decryption**: Adds a `plaintext` field with the decrypted data
-- **Error**: If an error occurs, an `error` field is added with the error message
+该节点将结果添加到您的数据中：
+- **加密**：添加包含加密数据的 `ciphertext` 字段（以 '04' 为前缀）
+- **解密**：添加包含解密数据的 `plaintext` 字段
+- **错误**：如果发生错误，将添加包含错误消息的 `error` 字段
 
-### Example Usage
+### 使用示例
 
-**Encryption Example:**
+**加密示例：**
 ```json
-Input: { "data": "Hello, World!" }
-Output: { "data": "Hello, World!", "ciphertext": "04..." }
+输入：{ "data": "Hello, World!" }
+输出：{ "data": "Hello, World!", "ciphertext": "04..." }
 ```
 
-**Decryption Example:**
+**解密示例：**
 ```json
-Input: { "data": "04..." }
-Output: { "data": "04...", "plaintext": "Hello, World!" }
+输入：{ "data": "04..." }
+输出：{ "data": "04...", "plaintext": "Hello, World!" }
 ```
 
-### Key Format
+### 密钥格式
 
-Keys should be provided in hexadecimal format:
-- Public keys: 64-character hex string (uncompressed format without '04' prefix)
-- Private keys: 64-character hex string
+密钥应以十六进制格式提供：
+- 公钥：64 字符十六进制字符串（未压缩格式，不含 '04' 前缀）
+- 私钥：64 字符十六进制字符串
 
-## Resources
+## 资源
 
-* [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
-* [SM2 Cryptographic Algorithm Specification](https://tools.ietf.org/html/draft-shen-sm2-ecdsa-02)
-* [sm-crypto library documentation](https://github.com/JuneAndGreen/sm-crypto)
+* [n8n 社区节点文档](https://docs.n8n.io/integrations/#community-nodes)
+* [SM2 密码算法规范](https://tools.ietf.org/html/draft-shen-sm2-ecdsa-02)
+* [sm-crypto 库文档](https://github.com/JuneAndGreen/sm-crypto)
 
-## License
+## 许可证
 
 [MIT](LICENSE.md)
