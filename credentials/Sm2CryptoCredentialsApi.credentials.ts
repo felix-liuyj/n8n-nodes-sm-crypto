@@ -6,7 +6,7 @@ import {
 } from 'n8n-workflow';
 
 export class Sm2CryptoCredentialsApi implements ICredentialType {
-	name = 'exampleCredentialsApi';
+	name = 'sm2CryptoCredentialsApi';
 	displayName = 'Example Credentials API';
 
 	documentationUrl = 'https://your-docs-url';
