@@ -17,7 +17,7 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 
 Install the package:
 ```bash
-npm install n8n-nodes-sm2-crypto
+npm install n8n-nodes-sm-crypto
 ```
 
 ## Operations
