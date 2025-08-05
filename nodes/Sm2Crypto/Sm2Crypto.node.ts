@@ -18,7 +18,7 @@ export class Sm2Crypto implements INodeType {
 		defaults: {
 			name: 'SM2 Crypto',
 		},
-		iconUrl: 'https://cambria-tech-public.oss-cn-hongkong.aliyuncs.com/logo/npm/sm2.logo.svg',
+		icon: 'file:./sm2.logo.svg',
 		inputs: [NodeConnectionType.Main],
 		outputs: [NodeConnectionType.Main],
 		properties: [
