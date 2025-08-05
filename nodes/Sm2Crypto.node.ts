@@ -18,6 +18,7 @@ export class Sm2Crypto implements INodeType {
 		defaults: {
 			name: 'SM2 Crypto',
 		},
+		icon: 'file:resources/sm2.logo.svg',
 		inputs: [NodeConnectionType.Main],
 		outputs: [NodeConnectionType.Main],
 		properties: [
@@ -72,8 +73,15 @@ export class Sm2Crypto implements INodeType {
 				} else {
 					let cipher = typeof value === 'string' ? value : String(value);
 					if (cipher.startsWith('04')) cipher = cipher.slice(2);
-					const decrypted = sm2.doDecrypt(cipher, token, 1);
-					result = { plaintext: decrypted };
+
+					let decrypted = sm2.doDecrypt(cipher, token, 1);
+
+					// 判断是否为 JSON 字符串
+					try {
+						result = JSON.parse(decrypted); // 返回整个对象
+					} catch {
+						result = { plaintext: decrypted }; // 返回原始字符串
+					}
 				}
 			} catch (error) {
 				result = { error: (error as Error).message };
