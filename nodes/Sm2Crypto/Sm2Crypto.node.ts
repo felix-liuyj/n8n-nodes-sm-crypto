@@ -89,7 +89,6 @@ export class Sm2Crypto implements INodeType {
 
 			returnData.push({
 				json: {
-					...items[i].json,
 					...result,
 				},
 			});
