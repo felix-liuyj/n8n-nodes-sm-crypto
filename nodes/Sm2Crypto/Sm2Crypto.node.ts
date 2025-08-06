@@ -79,8 +79,8 @@ export class Sm2Crypto implements INodeType {
 					// 判断是否为 JSON 字符串
 					try {
 						result = JSON.parse(decrypted); // 返回整个对象
-					} catch {
-						result = { plaintext: decrypted }; // 返回原始字符串
+					} catch (error) {
+						result = { error, plaintext: decrypted }; // 返回原始字符串
 					}
 				}
 			} catch (error) {
